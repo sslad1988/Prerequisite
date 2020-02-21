@@ -1,4 +1,4 @@
-package com.thouhtworks.workshop;
+package com.thouhtworks.workshop.sync;
 
 import java.util.LinkedList;
 import java.util.List;
