@@ -1,4 +1,4 @@
-package com.thouhtworks.workshop.future;
+package com.thoughtworks.workshop.future;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +16,9 @@ public class AccountTest {
 
         List<Future<Double>> resultList = new ArrayList<>();
 
-        Callable deposit = () -> {
-            return a.deposit(100);
-        };
+        Callable<Double> deposit = () -> a.deposit(100);
 
-        Callable withdrawal = () -> {
-            return a.withdraw(100);
-        };
+        Callable<Double> withdrawal = () -> a.withdraw(100);
 
         Runnable transaction = () -> {
             a.listTransaction();
@@ -34,9 +30,9 @@ public class AccountTest {
         };
 
         for (int i = 0; i < 50; i++) {
-            Future depositResult = executorService.submit(deposit);
+            Future<Double> depositResult = executorService.submit(deposit);
             resultList.add(depositResult);
-            Future withdrawalResult = executorService.submit(withdrawal);
+            Future<Double> withdrawalResult = executorService.submit(withdrawal);
             resultList.add(withdrawalResult);
 
         }

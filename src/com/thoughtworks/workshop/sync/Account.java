@@ -1,4 +1,4 @@
-package com.thouhtworks.workshop.sync;
+package com.thoughtworks.workshop.sync;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -69,11 +69,6 @@ public class Account {
     }
 
     private String getPadding(int length) {
-        String padding = "";
-        for (int i = 0; i < 100 - length; i++) {
-            padding = padding + " ";
-
-        }
-        return padding + "|";
+        return " ".repeat(Math.max(0, 100 - length)) + "|";
     }
 }

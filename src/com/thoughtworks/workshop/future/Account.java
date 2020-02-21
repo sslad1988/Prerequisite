@@ -1,4 +1,4 @@
-package com.thouhtworks.workshop.future;
+package com.thoughtworks.workshop.future;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -19,11 +19,10 @@ public class Account {
         lock = new ReentrantLock(true);
     }
 
-    public  double withdraw(double amount) {
+    public double withdraw(double amount) {
         if (amount <= 0) {
             return balance;
         }
-        double oldBalance = balance;
         if (amount > balance) {
             System.out.println(WITHDRAWAL + "_FAILED" + " : " + amount);
 
@@ -36,11 +35,10 @@ public class Account {
         // lock.unlock();
     }
 
-    public  double deposit(double amount) {
+    public double deposit(double amount) {
         if (amount <= 0) {
             return balance;
         }
-        double oldBalance = balance;
         System.out.println(DEPOSIT + " : " + amount);
         // lock.lock();
         balance = balance + amount;
@@ -53,7 +51,7 @@ public class Account {
         statement.add("| " + seq++ + transaction);
     }
 
-    public  void listTransaction() {
+    public void listTransaction() {
         System.out.println("======================= Start Statement for Account # " + accountNumber + "=============================================");
         if (statement.size() == 0) {
             System.out.println("======================= End Statement for Account # " + accountNumber + "==============================================");
@@ -68,11 +66,6 @@ public class Account {
     }
 
     private String getPadding(int length) {
-        String padding = "";
-        for (int i = 0; i < 100 - length; i++) {
-            padding = padding + " ";
-
-        }
-        return padding + "|";
+        return " ".repeat(Math.max(0, 100 - length)) + "|";
     }
 }

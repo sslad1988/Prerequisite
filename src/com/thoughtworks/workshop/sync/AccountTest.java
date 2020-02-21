@@ -1,4 +1,4 @@
-package com.thouhtworks.workshop.sync;
+package com.thoughtworks.workshop.sync;
 
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -14,15 +14,10 @@ public class AccountTest {
         ExecutorService executorService = Executors.newFixedThreadPool(10);
 
 
-        Runnable deposit = () -> {
+        Runnable deposit = () -> a.deposit(100);
 
-            a.deposit(100);
 
-        };
-
-        Runnable withdrawal = () -> {
-            a.withdraw(100);
-        };
+        Runnable withdrawal = () -> a.withdraw(100);
 
         Runnable transaction = () -> {
             a.listTransaction();
@@ -42,7 +37,7 @@ public class AccountTest {
         executorService.shutdown();
 
         long endTime = System.currentTimeMillis();
-        System.out.println("Time taken "+  (endTime - startTime));
+        System.out.println("Time taken " + (endTime - startTime));
     }
 
 
