@@ -2,6 +2,7 @@ package com.thoughtworks.workshop.async;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Account {
@@ -19,37 +20,44 @@ public class Account {
         lock = new ReentrantLock(true);
     }
 
-    public double withdraw(double amount) {
+    public String withdraw(double amount) {
+        UUID uuid = UUID.randomUUID();
+        System.out.println("Before : " + WITHDRAWAL + " : " + uuid + ", Balance : " + this.balance);
         if (amount <= 0) {
-            return balance;
+            return WITHDRAWAL + "_FAILED : " + uuid;
         }
         if (amount > balance) {
-            System.out.println(WITHDRAWAL + "_FAILED" + " : " + amount);
+            System.out.println(uuid + " : " + WITHDRAWAL + "_FAILED" + " : " + amount);
             //recordTransaction(oldBalance, amount, WITHDRAWAL + "_FAILED");
-            return balance;
+            return WITHDRAWAL + "_FAILED : " + uuid;
         }
-        System.out.println(WITHDRAWAL + " : " + amount);
-        // lock.lock();
-        return balance = balance - amount;
 
+        System.out.println(uuid + " : " + WITHDRAWAL + " : " + amount);
+        // lock.lock();
+        balance = balance - amount;
+        return WITHDRAWAL + " : " + uuid;
         // lock.unlock();
     }
 
-    public double deposit(double amount) {
+    public String deposit(double amount) {
+        UUID uuid = UUID.randomUUID();
+        System.out.println("Before : " + DEPOSIT + " : " + uuid + ", Balance : " + this.balance);
         if (amount <= 0) {
-            return balance;
+            return DEPOSIT + " : " + uuid;
         }
-        System.out.println(DEPOSIT + " : " + amount);
+        System.out.println(uuid + " : " + DEPOSIT + " : " + amount);
 
-        return balance = balance + amount;
+        balance = balance + amount;
+        return DEPOSIT + " : " + uuid;
 
     }
 
 
-    public void recordTransaction(double balance) {
-        String transaction = " Current Balance : " + balance;
+    public void recordTransaction(String uuid) {
+        String transaction = "After : " + uuid + ", Balance : " + this.balance;
+        System.out.println(transaction);
         statement.add("| " + seq++ + transaction);
-        listTransaction();
+        //   listTransaction();
     }
 
     public void listTransaction() {

@@ -25,7 +25,6 @@ public class Account {
         }
         if (amount > balance) {
             System.out.println(WITHDRAWAL + "_FAILED" + " : " + amount);
-
             return balance;
         }
         System.out.println(WITHDRAWAL + " : " + amount);
